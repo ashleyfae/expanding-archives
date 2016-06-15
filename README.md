@@ -28,6 +28,9 @@ Change the year font colour:
 
 ## Changelog
 
+**1.0.5**
+* Use transient for database query that fetches all the months.
+
 **1.0.4**
 * Added `xhrFields: { withCredentials: true }` to ajax call.
 
