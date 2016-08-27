@@ -52,6 +52,9 @@ Change the year font colour:
 
 == Changelog ==
 
+= 1.1.0 =
+* Added a new option in the widget where you can choose to auto expand the current month or not.
+
 = 1.0.5 =
 * Use transient for database query that fetches all the months.
 
@@ -73,5 +76,5 @@ Change the year font colour:
 
 == Upgrade Notice ==
 
-= 1.0.5 =
-Use transients for database query that fetches all the months.
+= 1.1.0 =
+New option in the widget to disable automatically expanding the current month.

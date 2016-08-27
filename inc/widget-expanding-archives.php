@@ -32,6 +32,13 @@ class NG_Expanding_Archives_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
+		$defaults = array(
+			'title'          => '',
+			'expand_current' => true
+		);
+
+		$instance = wp_parse_args( $instance, $defaults );
+
 		echo $args['before_widget'];
 
 		$title = empty( $instance['title'] ) ? '' : apply_filters( 'widget_title', $instance['title'] );
@@ -68,7 +75,7 @@ class NG_Expanding_Archives_Widget extends WP_Widget {
 					<a data-toggle="collapse" href="#collapse<?php echo $month->year; ?>"><?php echo $month->year; ?></a>
 				</h3>
 
-				<div id="collapse<?php echo $month->year; ?>" class="expanding-archives-collapse-section<?php echo ( $month->year == $date_current_year ) ? ' expanding-archives-expanded' : ''; ?>">
+				<div id="collapse<?php echo $month->year; ?>" class="expanding-archives-collapse-section<?php echo ( $month->year == $date_current_year && $instance['expand_current'] ) ? ' expanding-archives-expanded' : ''; ?>">
 				<ul>
 			<?php } ?>
 
@@ -112,11 +119,21 @@ class NG_Expanding_Archives_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+		$defaults = array(
+			'title'          => '',
+			'expand_current' => true
+		);
+
+		$instance = wp_parse_args( $instance, $defaults );
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>">
+		</p>
+
+		<p>
+			<input id="<?php echo $this->get_field_id( 'expand_current' ); ?>" name="<?php echo $this->get_field_name( 'expand_current' ); ?>" type="checkbox" value="1" <?php checked( $instance['expand_current'], true ); ?>>
+			<label for="<?php echo $this->get_field_id( 'expand_current' ); ?>"><?php _e( 'Automatically expand current month' ); ?></label>
 		</p>
 		<?php
 	}
@@ -132,8 +149,9 @@ class NG_Expanding_Archives_Widget extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance          = array();
-		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance                   = array();
+		$instance['title']          = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['expand_current'] = ( array_key_exists( 'expand_current', $new_instance ) && $new_instance['expand_current'] ) ? true : false;
 
 		return $instance;
 	}
