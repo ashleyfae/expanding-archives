@@ -11,7 +11,7 @@ class NG_Expanding_Archives {
 
 	/**
 	 * The single instance of the plugin.
-	 * @var Naked_Social_Share
+	 * @var NG_Expanding_Archives
 	 * @since 1.0.0
 	 */
 	private static $_instance = null;
