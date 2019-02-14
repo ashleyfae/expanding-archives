@@ -3,7 +3,7 @@ Contributors: NoseGraze
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L2TL7ZBVUMG9C
 Tags: widget, sidebar, posts, archives, navigation, menu, collapse, expand, collapsing, collapsible, expanding, expandable
 Requires at least: 3.0
-Tested up to: 4.9
+Tested up to: 5.0.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -52,6 +52,9 @@ Change the year font colour:
 
 == Changelog ==
 
+= 1.1.1 =
+* Added filters that allow developers to easily modify the archive list.
+
 = 1.1.0 =
 * Added a new option in the widget where you can choose to auto expand the current month or not.
 
@@ -76,5 +79,5 @@ Change the year font colour:
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-New option in the widget to disable automatically expanding the current month.
+= 1.1.1 =
+* Added filters that allow developers to easily modify the archive list.
