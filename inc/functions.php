@@ -17,7 +17,9 @@ function expanding_archives_get_months() {
 	global $wpdb;
 
 	if ( false === ( $months = get_transient( 'expanding_archives_months' ) ) ) {
-		$months = $wpdb->get_results( "SELECT DISTINCT MONTH( post_date ) AS month , YEAR( post_date ) AS year, COUNT( id ) as post_count FROM $wpdb->posts WHERE post_status = 'publish' and post_date <= now( ) and post_type = 'post' GROUP BY month , year ORDER BY post_date DESC" );
+		$query = "SELECT DISTINCT MONTH( post_date ) AS month , YEAR( post_date ) AS year, COUNT( id ) as post_count FROM $wpdb->posts WHERE post_status = 'publish' and post_date <= now( ) and post_type = 'post' GROUP BY month , year ORDER BY post_date DESC";
+		$query = apply_filters( 'expanding_archives_query', $query );
+		$months = $wpdb->get_results( $query );
 
 		set_transient( 'expanding_archives_months', $months, DAY_IN_SECONDS );
 	}

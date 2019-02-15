@@ -226,13 +226,16 @@ class NG_Expanding_Archives {
 			$year  = date( 'Y' );
 			$month = date( 'm' );
 
-			// Query the posts.
-			$archives = get_posts( array(
+			$arc_args = array(
 				'posts_per_page' => - 1,
 				'nopaging'       => true,
 				'year'           => intval( $year ),
 				'monthnum'       => intval( $month ),
-			) );
+			);
+			$arc_args = apply_filters( 'expanding_archives_get_posts', $arc_args );
+
+			// Query the posts.
+			$archives = get_posts( $arc_args );
 
 			// If we have results, add each one to a list.
 			if ( $archives ) {
@@ -268,14 +271,17 @@ class NG_Expanding_Archives {
 		$month = strip_tags( $_POST['month'] );
 		$year  = strip_tags( $_POST['year'] );
 
-		// Query for posts in the given month/year.
-		$archives = get_posts( array(
+		$arc_args = array(
 			'posts_per_page' => - 1,
 			'nopaging'       => true,
 			'year'           => intval( $year ),
 			'monthnum'       => intval( $month ),
-		) );
+		);
+		$arc_args = apply_filters( 'expanding_archives_list_posts', $arc_args );
 
+		// Query for posts in the given month/year.
+		$archives = get_posts( $arc_args );
+		
 		// If we have results, add each one to our list.
 		if ( $archives ) {
 			$result = '<ul>';
@@ -283,11 +289,10 @@ class NG_Expanding_Archives {
 				$result .= '<li><a href="' . get_permalink( $archive ) . '">' . get_the_title( $archive ) . '</a></li>';
 			}
 			$result .= '</ul>';
-			wp_send_json_success( $result );
 		} else {
 			$result = '<ul><li>' . __( 'No posts found.', $this->_token ) . '</li></ul>';
-			wp_send_json_success( $result );
 		}
+		wp_send_json_success( $result );
 
 		exit;
 	}

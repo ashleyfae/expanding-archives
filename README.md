@@ -28,6 +28,9 @@ Change the year font colour:
 
 ## Changelog
 
+**1.1.1**
+* Added filters that allow developers to easily modify the archive list.
+
 **1.1.0**
 * Added a new option in the widget where you can choose to auto expand the current month or not.
 
