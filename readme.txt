@@ -17,9 +17,7 @@ Expanding Archives adds a widget that shows your old posts in an expandable/coll
 
 This plugin comes with very minimal CSS styling so you can easily customize it to match your design.
 
-Expanding Archives uses Font Awesome icons in a few places, so having that installed is recommended. However, the widget still functions perfectly fine without them.
-
-JavaScript is required.
+JavaScript is required. No IE support.
 
 == Installation ==
 
