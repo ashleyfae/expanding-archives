@@ -16,3 +16,6 @@ package.json export-ignore
 package.lock export-ignore
 webpack.mix.js export-ignore
 mix-manifest.json export-ignore
+
+# Asset source files
+assets/src export-ignore

@@ -1,5 +1,8 @@
 /* global expandingArchives */
 
+/**
+ * Sets up on DOM load events.
+ */
 document.addEventListener( 'DOMContentLoaded', () => {
     const years = document.querySelectorAll( '.expanding-archives-title a' );
     if ( years ) {
@@ -16,6 +19,11 @@ document.addEventListener( 'DOMContentLoaded', () => {
     }
 } );
 
+/**
+ * Changes the visibility of a year.
+ * @since 2.0
+ * @param e
+ */
 function toggleYear( e ) {
     e.preventDefault();
 
@@ -35,6 +43,14 @@ function toggleYear( e ) {
     }
 }
 
+/**
+ * Loads the posts for the selected month.
+ * If the data has already been loaded, then we just toggle the visibility of the contents.
+ *
+ * @since 2.0
+ *
+ * @param e
+ */
 function maybeLoadMonths( e ) {
     e.preventDefault();
 
@@ -45,11 +61,11 @@ function maybeLoadMonths( e ) {
     if ( monthLink.getAttribute( 'data-rendered' ) === '1' ) {
         toggleMonth( monthLink );
     } else {
-        // @todo spinner
         const spinner = monthLink.querySelector( '.expanding-archives-spinner' );
         if ( spinner ) {
             spinner.classList.add( 'expanding-archives-spinner--active' );
         }
+
         const url = new URL( expandingArchives.restBase );
         url.searchParams.append( 'after', monthLink.getAttribute( 'data-after' ) );
         url.searchParams.append( 'before', monthLink.getAttribute( 'data-before' ) );
@@ -77,6 +93,8 @@ function maybeLoadMonths( e ) {
 /**
  * Expands or collapses a month, based on its current visibility.
  *
+ * @since 2.0
+ *
  * @param {HTMLElement} monthLink
  */
 function toggleMonth( monthLink ) {
@@ -94,6 +112,14 @@ function toggleMonth( monthLink ) {
     }
 }
 
+/**
+ * Formats the HTML for a single post.
+ *
+ * @since 2.0
+ *
+ * @param {object} post
+ * @returns {string}
+ */
 function formatPost( post ) {
     return `<li>
     <a href="${post.link}">${post.title.rendered}</a>
