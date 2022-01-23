@@ -6,10 +6,7 @@
 # Composer
 composer.json export-ignore
 
-# .org stuff
-screenshot-1.png export-ignore
-screenshot-2.png export-ignore
-screenshot-3.png export-ignore
+# Misc.
 README.md export-ignore
 
 # NPM / Mix
