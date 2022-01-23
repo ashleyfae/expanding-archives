@@ -22,7 +22,7 @@ class DateQuery
         $months = get_transient('expanding_archives_months');
 
         if (false === $months) {
-            $query  = "
+            $query = "
 SELECT DISTINCT MONTH(post_date) AS month , YEAR(post_date) AS year, COUNT(id) as post_count
 FROM {$wpdb->posts}
 WHERE post_status = 'publish'
@@ -30,7 +30,16 @@ AND post_date <= now()
 AND post_type = 'post'
 GROUP BY month, year
 ORDER BY post_date DESC";
-            $query  = apply_filters('expanding_archives_query', $query);
+
+            /**
+             * Filters the query for retrieving date periods.
+             *
+             * @since 1.1.1
+             *
+             * @param  string  $query
+             */
+            $query = apply_filters('expanding_archives_query', $query);
+
             $months = $wpdb->get_results($query);
 
             set_transient('expanding_archives_months', $months, DAY_IN_SECONDS);

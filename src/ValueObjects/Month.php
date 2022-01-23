@@ -71,7 +71,16 @@ class Month
             'monthnum'       => $this->monthNumber,
         ];
 
-        return get_posts(apply_filters('expanding_archives_get_posts', $args));
+        /**
+         * Filters the arguments used for retrieving posts.
+         *
+         * @since 1.1.1
+         *
+         * @param  array  $args
+         */
+        $args = apply_filters('expanding_archives_get_posts', $args);
+
+        return get_posts($args);
     }
 
 }
