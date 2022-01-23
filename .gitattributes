@@ -1,6 +1,7 @@
 # Git
 .gitignore export-ignore
 .gitattributes export-ignore
+.github/ export-ignore
 
 # Composer
 composer.json export-ignore
