@@ -11,7 +11,7 @@ README.md export-ignore
 
 # NPM / Mix
 package.json export-ignore
-package.lock export-ignore
+package-lock.json export-ignore
 webpack.mix.js export-ignore
 mix-manifest.json export-ignore
 
