@@ -53,6 +53,12 @@ Change the year font colour:
 
 == Changelog ==
 
+= 2.0 - 23 January, 2022 =
+* Dev: Plugin has been rewritten (should be backwards compatible).
+* Dev: Removed jQuery dependency (and dropped IE support).
+* Dev: Remove Font Awesome spinner in favour of vanilla CSS.
+* Fix: Invalid HTML when the site has no posts.
+
 = 1.1.1 =
 * Added filters that allow developers to easily modify the archive list.
 
@@ -80,5 +86,5 @@ Change the year font colour:
 
 == Upgrade Notice ==
 
-= 1.1.1 =
-* Added filters that allow developers to easily modify the archive list.
+= 2.0 =
+* Plugin rewrite, with backwards compatibility.
