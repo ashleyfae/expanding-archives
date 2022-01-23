@@ -1,17 +1,20 @@
 <?php
-/*
+/**
  * Plugin Name: Expanding Archives
  * Plugin URI: https://shop.nosegraze.com/product/expanding-archives/
  * Description: A widget showing old posts that you can expand by year and month.
- * Version: 1.1.1
- * Author: Nose Graze
+ * Version: 2.0
+ * Author: Ashley Gibson
  * Author URI: https://www.nosegraze.com
  * License: GPL2
  * Text Domain: expanding-archives
  * Domain Path: lang
  *
+ * Requires at least: 3.0
+ * Requires PHP: 7.4
+ *
  * @package   expanding-archives
- * @copyright Copyright (c) 2019, Ashley Evans
+ * @copyright Copyright (c) 2022, Ashley Gibson
  * @license   GPL2+
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,21 +31,25 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-/**
- * Include the main plugin class.
- */
-include_once plugin_dir_path( __FILE__ ) . 'inc/class-expanding-archives.php';
+use Ashleyfae\ExpandingArchives\Plugin;
+
+if (version_compare(phpversion(), '7.4', '<')) {
+    return;
+}
+
+const EXPANDING_ARCHIVES_FILE    = __FILE__;
+const EXPANDING_ARCHIVES_VERSION = '2.0';
+
+require_once dirname(__FILE__).'/vendor/autoload.php';
 
 /**
  * Loads the whole plugin.
  *
  * @since 1.0.0
- * @return NG_Expanding_Archives
+ * @return Plugin
  */
 function NG_Expanding_Archives() {
-	$instance = NG_Expanding_Archives::instance( __FILE__, '1.1.1' );
-
-	return $instance;
+    return Plugin::instance();
 }
 
-NG_Expanding_Archives();
+NG_Expanding_Archives()->boot();

@@ -3,7 +3,7 @@
  * Plugin Functions
  *
  * @package   expanding-archives
- * @copyright Copyright (c) 2016, Nose Graze Ltd.
+ * @copyright Copyright (c) 2022, Ashley Gibson
  * @license   GPL2+
  */
 
@@ -13,16 +13,7 @@
  * @since 1.0.5
  * @return array
  */
-function expanding_archives_get_months() {
-	global $wpdb;
-
-	if ( false === ( $months = get_transient( 'expanding_archives_months' ) ) ) {
-		$query = "SELECT DISTINCT MONTH( post_date ) AS month , YEAR( post_date ) AS year, COUNT( id ) as post_count FROM $wpdb->posts WHERE post_status = 'publish' and post_date <= now( ) and post_type = 'post' GROUP BY month , year ORDER BY post_date DESC";
-		$query = apply_filters( 'expanding_archives_query', $query );
-		$months = $wpdb->get_results( $query );
-
-		set_transient( 'expanding_archives_months', $months, DAY_IN_SECONDS );
-	}
-
-	return apply_filters( 'expanding-archives/months', $months );
+function expanding_archives_get_months(): array
+{
+    return (new \Ashleyfae\ExpandingArchives\Helpers\DateQuery())->queryPeriods();
 }

@@ -1,0 +1,15 @@
+{
+    "name": "ashleyfae/expanding-archives",
+    "description": "A widget showing old posts that you can expand by year and month.",
+    "type": "wordpress-plugin",
+    "autoload": {
+        "psr-4": {
+            "Ashleyfae\\ExpandingArchives\\": "src/"
+        },
+        "files": [
+            "inc/functions.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
