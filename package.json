@@ -1,0 +1,27 @@
+{
+  "name": "expanding-archives",
+  "version": "2.0.0",
+  "description": "A widget showing old posts that you can expand by year and month.",
+  "scripts": {
+    "build": "npm run i18n && mix --production",
+    "dev": "mix watch",
+    "i18n": "wp i18n make-pot . lang/expanding-archives.pot --domain=expanding-archives"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nosegraze/expanding-archives.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/nosegraze/expanding-archives/issues"
+  },
+  "homepage": "https://github.com/nosegraze/expanding-archives#readme",
+  "devDependencies": {
+    "laravel-mix": "^6.0.39",
+    "resolve-url-loader": "^4.0.0",
+    "sass": "^1.49.0",
+    "sass-loader": "^12.4.0"
+  }
+}
