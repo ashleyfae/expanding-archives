@@ -70,6 +70,7 @@ function maybeLoadMonths( e ) {
         url.searchParams.append( 'after', monthLink.getAttribute( 'data-after' ) );
         url.searchParams.append( 'before', monthLink.getAttribute( 'data-before' ) );
         url.searchParams.append( '_fields', 'title,link' );
+        url.searchParams.append( 'per_page', '100' );
 
         fetch( url.href )
             .then( response => response.json() )
