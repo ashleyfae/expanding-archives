@@ -51,6 +51,9 @@ Change the year font colour:
 
 == Changelog ==
 
+= 2.0.1 - 31 January, 2022 =
+* Fix: Only showing a max of 10 posts in a month. Now it will show up to 100.
+
 = 2.0 - 23 January, 2022 =
 * Dev: Plugin has been rewritten (should be backwards compatible).
 * Dev: Removed jQuery dependency (and dropped IE support).
@@ -84,5 +87,5 @@ Change the year font colour:
 
 == Upgrade Notice ==
 
-= 2.0 =
-* Plugin rewrite, with backwards compatibility.
+= 2.0.1 =
+* Fix: Only showing a max of 10 posts in a month. Now it will show up to 100.
