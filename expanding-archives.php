@@ -3,7 +3,7 @@
  * Plugin Name: Expanding Archives
  * Plugin URI: https://shop.nosegraze.com/product/expanding-archives/
  * Description: A widget showing old posts that you can expand by year and month.
- * Version: 2.0.1
+ * Version: 2.0.2-beta1
  * Author: Ashley Gibson
  * Author URI: https://www.nosegraze.com
  * License: GPL2
@@ -38,7 +38,7 @@ if (version_compare(phpversion(), '7.4', '<')) {
 }
 
 const EXPANDING_ARCHIVES_FILE    = __FILE__;
-const EXPANDING_ARCHIVES_VERSION = '2.0.1';
+const EXPANDING_ARCHIVES_VERSION = '2.0.2-beta1';
 
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
