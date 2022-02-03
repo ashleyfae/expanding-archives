@@ -5,6 +5,7 @@
 
 # Composer
 composer.json export-ignore
+composer.lock export-ignore
 
 # Misc.
 README.md export-ignore
