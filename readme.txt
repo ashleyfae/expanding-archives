@@ -85,6 +85,9 @@ Note that the results may not update instantly, as the query to retrieve the dat
 
 == Changelog ==
 
+= 2.0.2 - 3 February, 2022 =
+* Refactor: Posts are now retrieved via a custom REST API endpoint, instead of the default. This allows developers to more easily filter the query arguments for retrieving posts.
+
 = 2.0.1 - 31 January, 2022 =
 * Fix: Only showing a max of 10 posts in a month. Now it will show up to 100.
 
@@ -121,5 +124,5 @@ Note that the results may not update instantly, as the query to retrieve the dat
 
 == Upgrade Notice ==
 
-= 2.0.1 =
-* Fix: Only showing a max of 10 posts in a month. Now it will show up to 100.
+= 2.0.2 =
+* Refactor: Use custom API endpoint for retrieving posts.
