@@ -9,6 +9,8 @@
 
 namespace Ashleyfae\ExpandingArchives;
 
+use Ashleyfae\ExpandingArchives\Api\v1\Posts;
+
 class Plugin
 {
     /**
@@ -92,6 +94,9 @@ class Plugin
         add_action('widgets_init', function () {
             register_widget(Widget::class);
         });
+        add_action('rest_api_init', function () {
+            (new Posts())->register();
+        });
 
         // Delete transient when new post is published.
         add_action('transition_post_status', array($this, 'delete_transient'), 10, 3);
@@ -145,7 +150,7 @@ class Plugin
             [
                 'ajaxurl'   => admin_url('admin-ajax.php'),
                 'nonce'     => wp_create_nonce('expand_archives'),
-                'restBase'  => rest_url('wp/v2/posts'),
+                'restBase'  => rest_url('expanding-archives/v1/posts'),
                 'restNonce' => wp_create_nonce('rest_nonce'),
             ]
         );
