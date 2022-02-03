@@ -103,4 +103,15 @@ class ApiTest extends ApiTestCase
         $this->assertCount(2, $data);
     }
 
+    /**
+     * @covers \Ashleyfae\ExpandingArchives\Api\v1\Posts::register
+     * @return void
+     */
+    public function test_request_with_invalid_dates_is_404()
+    {
+        $response = $this->makeRestRequest(0, 0);
+
+        $this->assertSame(404, $response->get_status());
+    }
+
 }
