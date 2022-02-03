@@ -66,16 +66,11 @@ function maybeLoadMonths( e ) {
             spinner.classList.add( 'expanding-archives-spinner--active' );
         }
 
-        const url = new URL( expandingArchives.restBase );
-        url.searchParams.append( 'after', monthLink.getAttribute( 'data-after' ) );
-        url.searchParams.append( 'before', monthLink.getAttribute( 'data-before' ) );
-        url.searchParams.append( '_fields', 'title,link' );
-        url.searchParams.append( 'per_page', '100' );
+        const url = expandingArchives.restBase + '/' + monthLink.getAttribute( 'data-year' ) + '/' + monthLink.getAttribute( 'data-month' );
 
-        fetch( url.href )
+        fetch( url )
             .then( response => response.json() )
             .then( response => {
-                console.log( 'Response', response );
                 resultsWrapper.innerHTML = response.map( formatPost ).join( "\n" );
                 monthLink.setAttribute( 'data-rendered', '1' );
                 toggleMonth( monthLink );
@@ -123,6 +118,6 @@ function toggleMonth( monthLink ) {
  */
 function formatPost( post ) {
     return `<li>
-    <a href="${post.link}">${post.title.rendered}</a>
+    <a href="${post.link}">${post.title}</a>
 </li>`;
 }

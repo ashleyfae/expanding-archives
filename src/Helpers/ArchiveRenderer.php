@@ -96,8 +96,8 @@ class ArchiveRenderer
             <a
                 href="<?php echo esc_url($month->getLink()); ?>"
                 class="expanding-archives-clickable-month<?php echo $this->shouldExpandMonth($month) ? ' expandable-archive-rendered-true' : ''; ?>"
-                data-after="<?php echo esc_attr($month->getStart()); ?>"
-                data-before="<?php echo esc_attr($month->getEnd()); ?>"
+                data-year="<?php echo esc_attr($month->year); ?>"
+                data-month="<?php echo esc_attr($month->monthNumber); ?>"
                 data-rendered="<?php echo esc_attr($this->shouldExpandMonth($month) ? '1' : '0'); ?>"
             >
                 <span class="expanding-archive-month">
