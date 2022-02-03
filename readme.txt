@@ -43,6 +43,40 @@ Change the year font colour:
     color: #ffffff;
 }`
 
+= How can I limit the results to a specific category? =
+
+By default, the widget includes posts in all categories. You can add the following code to a custom plugin or a child theme's functions.php file to limit the results to posts in a specific category:
+
+`add_filter('expanding_archives_get_posts', function(array $args) {
+     $args['cat'] = 2; // Replace with ID of your category.
+
+     return $args;
+ });
+
+ add_filter('expanding_archives_query', function(string $query) {
+     $category = get_category(2); // Replace with ID of your category.
+     if (! $category instanceof \WP_Term) {
+         return $query;
+     }
+
+     global $wpdb;
+
+     return "
+ SELECT DISTINCT MONTH(post_date) AS month, YEAR(post_date) AS year, COUNT(id) as post_count
+ FROM {$wpdb->posts}
+          INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id AND {$wpdb->term_relationships}.term_taxonomy_id = 2)
+ WHERE post_status = 'publish'
+   AND post_date <= now()
+   AND post_type = 'post'
+ GROUP BY month, year
+ ORDER BY post_date DESC
+     ";
+ });`
+
+Be sure to set the ID of your category in both of the designated places (the examples use ID `2`).
+
+Note that the results may not update instantly, as the query to retrieve the date periods is cached for one day. To force the query to re-run, delete this transient: `expanding_archives_months`
+
 == Screenshots ==
 
 1. The widget on my blog. This version has custom CSS applied.
