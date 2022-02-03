@@ -17,3 +17,7 @@ mix-manifest.json export-ignore
 
 # Asset source files
 assets/src export-ignore
+
+# Tests
+tests/ export-ignore
+phpunit.xml export-ignore
