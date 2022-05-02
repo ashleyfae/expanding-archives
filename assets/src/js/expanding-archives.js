@@ -66,7 +66,17 @@ function maybeLoadMonths( e ) {
             spinner.classList.add( 'expanding-archives-spinner--active' );
         }
 
-        const url = expandingArchives.restBase + '/' + monthLink.getAttribute( 'data-year' ) + '/' + monthLink.getAttribute( 'data-month' );
+        let url = expandingArchives.restBase + '/' + monthLink.getAttribute( 'data-year' ) + '/' + monthLink.getAttribute( 'data-month' );
+
+        if (typeof expandingArchives.queryArgs === 'object' && Object.keys(expandingArchives.queryArgs).length > 0) {
+            const urlParams = new URLSearchParams();
+
+            for (const paramKey in expandingArchives.queryArgs) {
+                urlParams.set(paramKey, expandingArchives.queryArgs[paramKey]);
+            }
+
+            url = url + '?' + urlParams.toString();
+        }
 
         fetch( url )
             .then( response => response.json() )

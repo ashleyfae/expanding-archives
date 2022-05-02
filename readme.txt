@@ -77,6 +77,34 @@ Be sure to set the ID of your category in both of the designated places (the exa
 
 Note that the results may not update instantly, as the query to retrieve the date periods is cached for one day. To force the query to re-run, delete this transient: `expanding_archives_months`
 
+= How can I add Polylang support? =
+
+If you're using Polylang, then the post list will show duplicate entries (one for each language). If you want to only show posts in the current language then this will require a few code snippets.
+
+You can add the following code to a custom plugin or a child theme's functions.php file:
+
+`/**
+  * Adds a language filter to the post query.
+  */
+ add_filter('expanding_archives_get_posts', function($args) {
+     if (isset($_GET['lang'])) {
+         $args['lang'] = sanitize_text_field(urldecode($_GET['lang']));
+     }
+
+     return $args;
+ });
+
+ /**
+  * Adds the current language to the REST API request as a `lang` query arg.
+  */
+ add_filter('expanding_archives_api_query_args', function($args) {
+     if (function_exists('pll_current_language')) {
+         $args['lang'] = pll_current_language();
+     }
+
+     return $args;
+ });`
+
 == Screenshots ==
 
 1. The widget on my blog. This version has custom CSS applied.
