@@ -152,8 +152,26 @@ class Plugin
                 'nonce'     => wp_create_nonce('expand_archives'),
                 'restBase'  => rest_url('expanding-archives/v1/posts'),
                 'restNonce' => wp_create_nonce('rest_nonce'),
+                'queryArgs' => $this->getQueryArgsForApiUrl(),
             ]
         );
+    }
+
+    /**
+     * Returns query args to append to the REST API URL when querying for posts in a given month.
+     *
+     * @since 2.0.2
+     *
+     * @return array
+     */
+    protected function getQueryArgsForApiUrl(): array
+    {
+        /**
+         * Query args should be in key => value format.
+         *
+         * @since 2.0.2
+         */
+        return (array) apply_filters('expanding_archives_api_query_args', []);
     }
 
     /**
