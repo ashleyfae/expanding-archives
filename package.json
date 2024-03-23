@@ -1,6 +1,6 @@
 {
   "name": "expanding-archives",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A widget showing old posts that you can expand by year and month.",
   "scripts": {
     "build": "npm run i18n && mix --production",
