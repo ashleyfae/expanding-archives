@@ -3,7 +3,7 @@ Contributors: NoseGraze
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L2TL7ZBVUMG9C
 Tags: widget, sidebar, posts, archives, navigation, menu, collapse, expand, collapsing, collapsible, expanding, expandable
 Requires at least: 3.0
-Tested up to: 6.0
+Tested up to: 6.4.3
 Requires PHP: 7.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -73,7 +73,22 @@ By default, the widget includes posts in all categories. You can add the followi
      ";
  });`
 
+
 Be sure to set the ID of your category in both of the designated places (the examples use ID `2`).
+
+Note that the results may not update instantly, as the query to retrieve the date periods is cached for one day. To force the query to re-run, delete this transient: `expanding_archives_months`
+
+= How can I specify a cut-off date? =
+
+By default, the widget will show a list of every year you've published posts.
+
+If you have a lot of posts, you may wish to only show results from the last few years. This can be done with the following code snippet:
+
+`add_filter('expanding-archives/earliest-date', fn() => '-4 years');`
+
+You can change `-4 years` to any value supported by [the PHP DateTime constructor](https://www.php.net/manual/en/datetime.construct.php). This can be a relative value (as shown above), or a specific date like:
+
+`add_filter('expanding-archives/earliest-date', fn() => '2023-01-01');`
 
 Note that the results may not update instantly, as the query to retrieve the date periods is cached for one day. To force the query to re-run, delete this transient: `expanding_archives_months`
 

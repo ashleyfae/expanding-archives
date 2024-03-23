@@ -10,6 +10,9 @@
 namespace Ashleyfae\ExpandingArchives\Helpers;
 
 use Ashleyfae\ExpandingArchives\ValueObjects\Month;
+use DateTime;
+use Exception;
+use ValueError;
 
 class DateQuery
 {
@@ -22,11 +25,17 @@ class DateQuery
         $months = get_transient('expanding_archives_months');
 
         if (false === $months) {
+            $earliestDateClause = '';
+            if ($earliestDate = $this->getEarliestDate()) {
+                $earliestDateClause = $wpdb->prepare(" AND post_date > %s ", $earliestDate->format('Y-m-d H:i:s'));
+            }
+
             $query = "
 SELECT DISTINCT MONTH(post_date) AS month , YEAR(post_date) AS year, COUNT(id) as post_count
 FROM {$wpdb->posts}
 WHERE post_status = 'publish'
 AND post_date <= now()
+{$earliestDateClause}
 AND post_type = 'post'
 GROUP BY month, year
 ORDER BY post_date DESC";
@@ -46,6 +55,33 @@ ORDER BY post_date DESC";
         }
 
         return (array) apply_filters('expanding-archives/months', $months);
+    }
+
+    /**
+     * Gets the earliest date to include in queries.
+     *
+     * @return DateTime|null
+     */
+    protected function getEarliestDate(): ?DateTime
+    {
+        /**
+         * Filters the earliest date to include in the widget. This can be any format supported by the DateTime
+         * constructor. For example: `-5 years` for a relative date, or `2024-03-23` for an exact date, etc.
+         *
+         * If null (default value) then all dates are included.
+         *
+         * @since 2.1.0
+         */
+        $earliestDateString = apply_filters('expanding-archives/earliest-date', null);
+        if (empty($earliestDateString)) {
+            return null;
+        }
+
+        try {
+            return new DateTime($earliestDateString);
+        } catch (Exception|ValueError $e) {
+            return null;
+        }
     }
 
     public function getPeriods(): array
