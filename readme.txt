@@ -100,6 +100,9 @@ Note that the results may not update instantly, as the query to retrieve the dat
 
 == Changelog ==
 
+= 2.1.0 - 23 March 2024 =
+* New: Added support (via a filter) for specifying a cut-off date. See readme FAQ for details.
+
 = 2.0.2 - 3 February, 2022 =
 * Refactor: Posts are now retrieved via a custom REST API endpoint, instead of the default. This allows developers to more easily filter the query arguments for retrieving posts.
 
@@ -139,5 +142,5 @@ Note that the results may not update instantly, as the query to retrieve the dat
 
 == Upgrade Notice ==
 
-= 2.0.2 =
-* Refactor: Use custom API endpoint for retrieving posts.
+= 2.1.0 =
+* Added support (via a filter) for specifying a cut-off date. See readme FAQ for details.
