@@ -100,7 +100,7 @@ Note that the results may not update instantly, as the query to retrieve the dat
 
 == Changelog ==
 
-= 2.1.1 =
+= 2.1.1 - 30 August 2026 =
 * Security: Fixed a stored XSS vulnerability.
 
 = 2.1.0 - 23 March 2024 =
@@ -145,5 +145,5 @@ Note that the results may not update instantly, as the query to retrieve the dat
 
 == Upgrade Notice ==
 
-= 2.1.0 =
-* Added support (via a filter) for specifying a cut-off date. See readme FAQ for details.
+= 2.1.1 =
+* Fixed stored XSS
