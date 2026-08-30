@@ -1,0 +1,44 @@
+name: Deploy to WordPress.org Repository
+
+on:
+  release:
+    # run only when a new release is published, but not when it's classified as a pre-release.
+    types: [released]
+
+jobs:
+  deploy_to_wp_repository:
+    name: Deploy to WP.org
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+        # The `wp` command fails when xdebug is enabled
+      - name: Disable Xdebug
+        run: sudo phpdismod xdebug
+
+      - name: Setup WP-CLI
+        uses: godaddy-wordpress/setup-wp-cli@1
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Install dependencies
+        run: |
+          composer install --no-dev --optimize-autoloader --no-progress --no-interaction
+
+      - name: WordPress Plugin Deploy
+        id: deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          generate-zip: true
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+
+      - name: Upload release asset
+        uses: ashleyfae/action-upload-release-asset@main
+        with:
+          file: ${{ steps.deploy.outputs.zip-path }}
