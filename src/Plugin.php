@@ -62,16 +62,24 @@ class Plugin
         }
 
         // Backwards compatibility for old properties from 1.x.
-        return match ($property) {
-            '_version' => EXPANDING_ARCHIVES_VERSION,
-            '_token' => 'expanding-archives',
-            'file' => EXPANDING_ARCHIVES_FILE,
-            'dir' => dirname(EXPANDING_ARCHIVES_FILE),
-            'assets_dir' => trailingslashit(dirname(EXPANDING_ARCHIVES_FILE)).'assets',
-            'assets_url' => $this->assetsUrl,
-            'script_suffix' => '',
-            default => null,
-        };
+        switch ($property) {
+            case '_version' :
+                return EXPANDING_ARCHIVES_VERSION;
+            case '_token' :
+                return 'expanding-archives';
+            case 'file' :
+                return EXPANDING_ARCHIVES_FILE;
+            case 'dir' :
+                return dirname(EXPANDING_ARCHIVES_FILE);
+            case 'assets_dir' :
+                return trailingslashit(dirname(EXPANDING_ARCHIVES_FILE)).'assets';
+            case 'assets_url' :
+                return $this->assetsUrl;
+            case 'script_suffix' :
+                return '';
+            default :
+                return null;
+        }
     }
 
     /**
