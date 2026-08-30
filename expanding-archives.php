@@ -14,7 +14,7 @@
  * Requires PHP: 7.4
  *
  * @package   expanding-archives
- * @copyright Copyright (c) 2024, Ashley Gibson
+ * @copyright Copyright (c) 2026, Ashley Gibson
  * @license   GPL2+
  *
  * This program is free software; you can redistribute it and/or modify
