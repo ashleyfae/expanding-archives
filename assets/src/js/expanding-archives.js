@@ -71,7 +71,10 @@ function maybeLoadMonths( e ) {
         fetch( url )
             .then( response => response.json() )
             .then( response => {
-                resultsWrapper.innerHTML = response.map( formatPost ).join( "\n" );
+                resultsWrapper.innerHTML = '';
+                response.forEach( post => {
+                    resultsWrapper.appendChild( formatPost( post ) );
+                } );
                 monthLink.setAttribute( 'data-rendered', '1' );
                 toggleMonth( monthLink );
             } )
@@ -109,15 +112,25 @@ function toggleMonth( monthLink ) {
 }
 
 /**
- * Formats the HTML for a single post.
+ * Builds the DOM element for a single post.
+ *
+ * Uses textContent/an anchor's href property (rather than innerHTML with
+ * interpolated strings) so post titles and links from the API can never
+ * be interpreted as HTML.
  *
  * @since 2.0
  *
  * @param {object} post
- * @returns {string}
+ * @returns {HTMLLIElement}
  */
 function formatPost( post ) {
-    return `<li>
-    <a href="${post.link}">${post.title}</a>
-</li>`;
+    const listItem = document.createElement( 'li' );
+    const link = document.createElement( 'a' );
+
+    link.href = post.link;
+    link.textContent = post.title;
+
+    listItem.appendChild( link );
+
+    return listItem;
 }
