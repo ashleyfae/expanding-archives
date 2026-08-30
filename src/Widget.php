@@ -3,7 +3,7 @@
  * Widget.php
  *
  * @package   expanding-archives
- * @copyright Copyright (c) 2022, Ashley Gibson
+ * @copyright Copyright (c) 2026, Ashley Gibson
  * @license   GPL2+
  * @since     2.0
  */
@@ -11,7 +11,6 @@
 namespace Ashleyfae\ExpandingArchives;
 
 use Ashleyfae\ExpandingArchives\Helpers\ArchiveRenderer;
-use Ashleyfae\ExpandingArchives\Helpers\DateQuery;
 
 class Widget extends \WP_Widget
 {

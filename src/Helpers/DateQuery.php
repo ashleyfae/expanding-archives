@@ -3,7 +3,7 @@
  * DateQuery.php
  *
  * @package   expanding-archives
- * @copyright Copyright (c) 2022, Ashley Gibson
+ * @copyright Copyright (c) 2026, Ashley Gibson
  * @license   GPL2+
  */
 
